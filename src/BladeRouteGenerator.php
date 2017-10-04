@@ -24,9 +24,9 @@ class BladeRouteGenerator
         $json = $this->getRoutePayload($group)->toJson();
         $appUrl = url('/') . '/';
         $routeFunction = file_get_contents(__DIR__ . '/js/route.js');
-
+        $token = csrf_token();
         return <<<EOT
-<script type="text/javascript">
+<script type="text/javascript" nonce='$token'>
     var namedRoutes = JSON.parse('$json'),
         baseUrl = '$appUrl';
         $routeFunction
